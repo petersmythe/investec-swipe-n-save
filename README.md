@@ -34,6 +34,8 @@ Hopefully the [card code](https://github.com/petersmythe/investec-swipe-n-save/b
 
 The account IDs need to be obtained manually via [getAccounts()](https://developer.investec.com/za/api-products/documentation/SA_PB_Account_Information#operation/accounts) or see the future enhancement below.
 
+Also, please note that these [clientID, secret and API Key](https://github.com/petersmythe/investec-swipe-n-save/blob/main/env.json) all come from the Sandbox credentials ([see Oauth2-Sandbox](https://developer.investec.com/za/api-products/documentation/SA_PB_Account_Information#section/Authentication)) and only work on https://openapisandbox.investec.com, not the production URL: https://openapi.investec.com
+
 ### Future enhancement
 
 *Self-fixing code!*
