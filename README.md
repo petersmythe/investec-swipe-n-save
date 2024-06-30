@@ -9,7 +9,7 @@ This is my additional submission for [https://investec.gitbook.io/programmable-b
 > 
 > \* configurable between 1 - 10000% !
 > 
-> Where does all of this FREE MONEY come from?  
+> Where does all of this FREE MONEY come from?  
 > <sub>(you!)</sub>
 
 The trick is to put aside money into a savings account each time you swipe your credit card. Let's automate that with Investec's Programmable Banking. 
@@ -42,5 +42,10 @@ If the `toAccountId` and `fromAccountId` parameters are not found in the `env.js
 
 Note the API Key scope will need to include `card`.
 
+*ATM Withdrawals*
 
+This code is just a demo of the API integrations, but you probably want to exclude ATM Withdrawals (merchant code: TBC) from the transactions, so that only true card purchases result in a transfer to the savings account.
 
+*Authorization Amount*
+
+And obviously, for a real implementation, the amount transferred (fixed at R1.00) will be a configurable percentage of the Authorization Amount.
