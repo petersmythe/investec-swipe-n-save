@@ -32,6 +32,8 @@ We can combine these to make a transfer to a savings account whenever a card pay
 
 Hopefully the [card code](https://github.com/petersmythe/investec-swipe-n-save/blob/main/main.js) is fairly obvious, but it first [fetches an OAuth token](https://developer.investec.com/za/api-products/documentation/SA_PB_Account_Information#section/Authentication) and then uses this token in a subsequent call to [perform the inter-account transfer](https://developer.investec.com/za/api-products/documentation/SA_PB_Account_Information#operation/transferv2).  
 
+The amount saved is calculated as a percentage of the amount swiped, using the `percentage` configuration in `env.json`.  Also note that ATM withdrawals (merchant code: 6011) are excluded, so that only true card purchases result in a transfer to the savings account.
+
 The account IDs need to be obtained manually via [getAccounts()](https://developer.investec.com/za/api-products/documentation/SA_PB_Account_Information#operation/accounts) or see the future enhancement below.
 
 Also, please note that these [clientID, secret and API Key](https://github.com/petersmythe/investec-swipe-n-save/blob/main/env.json) all come from the Sandbox credentials ([see Oauth2-Sandbox](https://developer.investec.com/za/api-products/documentation/SA_PB_Account_Information#section/Authentication)) and only work on https://openapisandbox.investec.com, not the production URL: https://openapi.investec.com
@@ -43,11 +45,3 @@ Also, please note that these [clientID, secret and API Key](https://github.com/p
 If the `toAccountId` and `fromAccountId` parameters are not found in the `env.json` file, the card code can make a once off API call (see `getAccounts()`) to obtain this data, and then use the [Card API to replace](https://developer.investec.com/za/api-products/documentation/SA_Card_Code#operation/UpdateFunctionEnvironmentVariables) its own `env.json` so that the next time it is called, the parameters are already available.
 
 Note the API Key scope will need to include `card`.
-
-*ATM Withdrawals*
-
-This code is just a demo of the API integrations, but you probably want to exclude ATM Withdrawals (merchant code: TBC) from the transactions, so that only true card purchases result in a transfer to the savings account.
-
-*Authorization Amount*
-
-And obviously, for a real implementation, the amount transferred (fixed at R1.00) will be a configurable percentage of the Authorization Amount.

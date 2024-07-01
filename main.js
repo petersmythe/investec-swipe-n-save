@@ -23,7 +23,7 @@ async function getAccounts(token) {
     // console.log(response.status);
     return (await response.json());
 };
-async function doTransfer(token) {
+async function doTransfer(token, amount) {
     const response = await fetch(
         `https://openapisandbox.investec.com/za/pb/v1/accounts/${process.env.fromAccountId}/transfermultiple`, {
             method: 'POST',
@@ -34,9 +34,9 @@ async function doTransfer(token) {
             body: JSON.stringify({
                 "transferList": [{
                     "beneficiaryAccountId": process.env.toAccountId,
-                    "amount": "1.00",
-                    "myReference": "Test from A to B",
-                    "theirReference": "Test from A to B"
+                    "amount": investec.helpers.format.decimal(amount / 100, 100),
+                    "myReference": "Swipe-n-Save",
+                    "theirReference": "Swipe-n-Save"
                 }],
                 "profileId": process.env.profileId
             })
@@ -51,12 +51,14 @@ const beforeTransaction = async (authorization) => {
 };
 // This function runs after a transaction was successful.
 const afterTransaction = async (transaction) => {
-    const token = await getAccessToken();
-    // const accounts = await getAccounts(token);
-    // console.log(accounts);
-    const transfer = await doTransfer(token);
-    console.log(transfer);
-    console.log(transaction);
+	if (transaction.merchant.category.code != 6011) {	// Don't do the transfer for ATM withdrawals
+		const token = await getAccessToken();
+		// const accounts = await getAccounts(token);
+		// console.log(accounts);
+		const transfer = await doTransfer(token, transaction.centsAmount * process.env.percentage / 100);
+		console.log(transfer);
+		// console.log(transaction);
+	}
 };
 // This function runs after a transaction has been declined.
 const afterDecline = async (transaction) => { 
