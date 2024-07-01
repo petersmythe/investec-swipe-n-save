@@ -24,7 +24,7 @@ We can combine these to make a transfer to a savings account whenever a card pay
 
 * Access to the Programmable Banking Card IDE - see [Investec  Developer Community wiki](https://investec.gitbook.io/programmable-banking-community-wiki/get-started/card-quick-start-guide) for a Quick Start Guide.
 
-* An API Key with these permissions/scopes as a minimum: `account, transfer` - see  [Investec  Developer Community wiki](https://investec.gitbook.io/programmable-banking-community-wiki/get-started/api-quick-start-guide) for a Quick Start Guide.
+* An API Key with these permissions/scopes as a minimum: `accounts, transfers` - see  [Investec  Developer Community wiki](https://investec.gitbook.io/programmable-banking-community-wiki/get-started/api-quick-start-guide) for a Quick Start Guide.
 
 ![Required API Key scopes](./images/apikey-permissions.png?raw=true)
 
@@ -44,4 +44,4 @@ Also, please note that these [clientID, secret and API Key](https://github.com/p
 
 If the `toAccountId` and `fromAccountId` parameters are not found in the `env.json` file, the card code can make a once off API call (see `getAccounts()`) to obtain this data, and then use the [Card API to replace](https://developer.investec.com/za/api-products/documentation/SA_Card_Code#operation/UpdateFunctionEnvironmentVariables) its own `env.json` so that the next time it is called, the parameters are already available.
 
-Note the API Key scope will need to include `card`.
+Note the API Key scope will need to include `cards`.
